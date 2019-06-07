@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 10:16:02 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/22 07:13:19 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/06 20:21:58 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # include "ft_md5.h"
 # include "ft_sha256.h"
 # include "ft_sha512.h"
+# include "base64.h"
 
 # define FLS 0x01
 # define FLQ 0x02
 # define FLP 0x04
 # define FLR 0x08
 
-# define CMD 5
+# define CMD 9
 
 # define ROTR(x, n, w) ((x >> n) | (x << (w - n)))
 # define ROTL(x, n, w) ((x << n) | (x >> (w - n)))
@@ -60,5 +61,10 @@ void				ssl_sha224(int argc, char **argv);
 void				ssl_sha256(int argc, char **argv);
 void				ssl_sha384(int argc, char **argv);
 void				ssl_sha512(int argc, char **argv);
+
+void				base64(int argc, char **argv);
+void				des(int argc, char **argv);
+void				des_cbc(int argc, char **argv);
+void				des_ecb(int argc, char **argv);
 
 #endif

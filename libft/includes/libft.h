@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:16:13 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/15 13:39:47 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/07 13:09:40 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@
 # include <string.h>
 # include "get_next_line.h"
 # include "ft_printf.h"
+
+# define BOLD	"\x1b[1m"
+# define ITALIC	"\x1b[3m"
+# define UNDERL	"\x1b[4m"
+# define CYAN	"\x1b[36m"
+# define RED	"\x1b[91m"
+# define GREEN	"\x1b[92m"
+# define YELLOW	"\x1b[93m"
+# define PURPLE	"\x1b[94m"
+# define RESET	"\x1b[0m"
 
 typedef struct		s_list
 {

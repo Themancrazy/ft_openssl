@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:47:30 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/22 07:12:46 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/06 15:18:22 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ t_dis				g_dis_table[CMD] = {
 	{"sha224", &ssl_sha224},
 	{"sha384", &ssl_sha384},
 	{"sha512", &ssl_sha512},
+	{"base64", &base64},
+	{"des", &des},
+	{"des-ecb", &des_ecb},
+	{"des-cbc", &des_cbc},
 };
 
 static void			manage_error(char *str, t_dis *cmd)
