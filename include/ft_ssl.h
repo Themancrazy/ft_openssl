@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 10:16:02 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/06 20:21:58 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/07 18:37:31 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void				handle_stdin(void);
 void				process_stdio_cmd(void);
 uint32_t			swap_endian(uint32_t num);
 uint64_t			swap_endian64(uint64_t x);
+void				send_error(char *error);
 
 void				ssl_md5(int argc, char **argv);
 void				ssl_sha224(int argc, char **argv);

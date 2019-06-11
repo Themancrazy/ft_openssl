@@ -6,12 +6,12 @@
 #    By: anjansse <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:57:22 by anjansse          #+#    #+#              #
-#    Updated: 2019/06/06 14:53:59 by anjansse         ###   ########.fr        #
+#    Updated: 2019/06/07 18:37:47 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= 	ft_ssl
-GENERAL		= 	ft_openssl.c process_stdio_cmd.c swap_endian.c
+GENERAL		= 	ft_openssl.c process_stdio_cmd.c swap_endian.c error.c
 MD5			=	md5.c md5_hash.c md5_utils.c process_functions.c
 SHA256		=	sha256.c sha256_hash.c sha256_process_functions.c\
 sha256_utils.c

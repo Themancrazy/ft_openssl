@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 14:44:17 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/07 13:33:17 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/10 22:19:21 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,42 +30,94 @@ static void		get_binary(char *str)
 	ft_putchar('\n');
 }
 
+static int				get_size(char *str, char c)
+{
+	if (c == 'e')
+		return (E_B64_SIZE(ft_strlen(str)));
+	return (0);
+}
+
+static t_base64			check_b64_flags(t_base64 base, char *flag)
+{
+	if (!ft_strcmp(flag, "-e"))
+		base.flag |= FLE;
+	else if (!ft_strcmp(flag, "-d"))
+		base.flag |= FLD;
+	else if (!ft_strcmp(flag, "-i"))
+		base.flag |= FLI;
+	else if (!ft_strcmp(flag, "-o"))
+		base.flag |= FLO;
+	return (base);
+}
+
+void			encrypt_str(char *str)
+{
+	int		size;
+	int		xy[2];
+	char	*encrypted;
+
+	xy[0] = 2;
+	xy[1] = 8;
+	size = get_size(str, 'e');
+	encrypted = (char *)malloc(sizeof(char) * size + 1);
+	while (size > 0)
+	{
+		if (xy[0] == 10)
+			xy[0] = 2;
+		if (xy[1] == 0)
+			xy[1] = 6;
+		if (xy[0] == 2)
+		{
+			ft_putchar('1');
+			ft_printf(CYAN BOLD"\n->%06b\n"RESET, RIGHT_SHIFT(*str));
+			*encrypted = base64_encoding[RIGHT_SHIFT(*str)];
+			ft_putchar(*encrypted);
+		}
+		else if (xy[1] == 2)
+		{
+			ft_putchar('2');
+			ft_printf(CYAN BOLD"\n->%06b\n"RESET, LEFT_SHIFT(*str));
+			*encrypted = base64_encoding[LEFT_SHIFT(*str)];
+			ft_putchar(*encrypted);
+		}
+		else if (*(str - 1) && xy[0] != 2 && xy[0] != 8 && xy[1] != 2 && xy[1] != 0)
+		{
+			ft_putchar('3');
+			ft_printf(CYAN BOLD"\n->%06b\n"RESET, SHIFT(*(str - 1), *str, xy[0], xy[1]));
+			*encrypted = base64_encoding[SHIFT(*(str - 1), *str, xy[0], xy[1])];
+			ft_putchar(*encrypted);
+		}
+		else if (*str == '\0')
+			*encrypted = base64_encoding[SHIFT(*(str - 1), *str, 0, xy[1])];
+		size--;
+		if (*str)
+			str++;
+		xy[0] += 2;
+		xy[1] -= 2;
+		encrypted++;
+	}
+	ft_putstr(encrypted);
+	ft_putchar('\n');
+}
+
+void			decrypt_str(char *str)
+{
+
+}
+
 void			base64(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	int				i;
-	int				j;
-	int				x;
-	unsigned char	pi;
 	t_base64	base;
-
-	get_binary(argv[0]);
-	i = -1;
-	j = 2;
-	x = 0;
-	base.size = B64_SIZE(ft_strlen(argv[0]));
-	printf("SIZE IS %d\n", base.size);
-	char test[base.size];
-	ft_printf(CYAN"BEFORE-> %s\n"RESET, argv[0]);
-	while (++i < base.size)
+	
+	base.flag = 0;
+	if (argc > 1 && argc <= 2)
 	{
-		//ft_memcpy(&pi, &argv[0], 2);
-		pi = 0;
-		ft_printf("%d. AT THIS TURN AV IS \x1b[91m%08b\n"RESET, i, argv[0][x]);
-		if (j == 8)
-			j = 2;
-		pi |= argv[0][x] >> j;
-		ft_printf("%d. \x1b[92mJ = %d\x1b[0m\tBEFORE THIS TURN PI IS %06b\n", i, j, pi);
-		if (x - 1 > 0 && j != 2)
-			pi |= argv[0][x - 1] << (8 - j);
-		//ft_printf("AT THIS TURN PI IS %06b\n", pi);
-		//ft_memmove(&argv[0], &argv[0], j);
-		test[i] = base64_encoding[pi];
-		if (x != ft_strlen(argv[0]))
-			x++;
-		j += 2;
-		ft_printf("%d. AFTER THIS TURN PI IS \x1b[93m\x1b[1m%06b\n\x1b[0m", i, pi);
+		base = check_b64_flags(base, argv[0]);
+		if (base.flag & FLE)
+			encrypt_str(argv[1]);
+		else if (base.flag & FLD)
+			decrypt_str(argv[1]);
 	}
-	ft_printf(CYAN"AFTER-> %s\n"RESET, test);
+	else
+		send_error(ft_strdup(RED"Not enough arguments (check the flags)"RESET));
 }
