@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 14:44:17 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/10 22:19:21 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/11 18:43:08 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,46 +57,38 @@ void			encrypt_str(char *str)
 	char	*encrypted;
 
 	xy[0] = 2;
-	xy[1] = 8;
+	xy[1] = 6;
 	size = get_size(str, 'e');
-	encrypted = (char *)malloc(sizeof(char) * size + 1);
+	encrypted = ft_memalloc(sizeof(char) * size + 1);
 	while (size > 0)
 	{
 		if (xy[0] == 10)
 			xy[0] = 2;
-		if (xy[1] == 0)
-			xy[1] = 6;
+		if (xy[1] == -2)
+			xy[1] = 4;
 		if (xy[0] == 2)
 		{
-			ft_putchar('1');
-			ft_printf(CYAN BOLD"\n->%06b\n"RESET, RIGHT_SHIFT(*str));
 			*encrypted = base64_encoding[RIGHT_SHIFT(*str)];
-			ft_putchar(*encrypted);
+			encrypted++;
+			size--;
 		}
-		else if (xy[1] == 2)
+		else if (xy[0] == 4 || xy[0] == 6)
 		{
-			ft_putchar('2');
-			ft_printf(CYAN BOLD"\n->%06b\n"RESET, LEFT_SHIFT(*str));
-			*encrypted = base64_encoding[LEFT_SHIFT(*str)];
-			ft_putchar(*encrypted);
-		}
-		else if (*(str - 1) && xy[0] != 2 && xy[0] != 8 && xy[1] != 2 && xy[1] != 0)
-		{
-			ft_putchar('3');
-			ft_printf(CYAN BOLD"\n->%06b\n"RESET, SHIFT(*(str - 1), *str, xy[0], xy[1]));
 			*encrypted = base64_encoding[SHIFT(*(str - 1), *str, xy[0], xy[1])];
-			ft_putchar(*encrypted);
+			encrypted++;
+			size--;
 		}
-		else if (*str == '\0')
-			*encrypted = base64_encoding[SHIFT(*(str - 1), *str, 0, xy[1])];
-		size--;
-		if (*str)
-			str++;
+		else if (xy[1] == 0)
+		{
+			*encrypted = base64_encoding[LEFT_SHIFT(*str)];
+			encrypted++;
+			size--;
+		}
 		xy[0] += 2;
 		xy[1] -= 2;
-		encrypted++;
+		if (xy[1] != 0)
+			str++;
 	}
-	ft_putstr(encrypted);
 	ft_putchar('\n');
 }
 
