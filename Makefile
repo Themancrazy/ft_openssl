@@ -6,7 +6,7 @@
 #    By: anjansse <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:57:22 by anjansse          #+#    #+#              #
-#    Updated: 2019/06/07 18:37:47 by anjansse         ###   ########.fr        #
+#    Updated: 2019/06/12 19:53:26 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,28 +39,32 @@ CFLAGS		=	-Wall -Wextra -Werror -g
 
 LLIB		=	libft.a
 
-lib:
-	@echo -n 'Compiling libft...'
-	@make -C libft/ re
-	@cp libft/libft.a .
-	@echo "\t\x1b[92m✓\x1b[0m\n"
+reprog: fclean all
 
 all: $(NAME)
 
 $(NAME):
-	@echo -n 'Compiling Program...'
+	@echo -n 'Compiling DES Program...'
 	@cp libft/libft.a .
 	@$(CC) $(CFLAG) $(SRCS) $(INCLUDES) $(LLIB) -o $(NAME)
 	@echo "\t\x1b[92m✓✓\x1b[0m\n"
+	@sleep 0.1
+	@clear
 	@echo "\x1b[36m\x1b[1m****************************************************\
-********"
-	@echo "         ____   ____   ______ _   __ _____ _____  __\n\
-  __/|_ / __ \ / __ \ / ____// | / // ___// ___/ / /   __/|_\n\
- |    // / / // /_/ // __/  /  |/ / \__ \ \__ \ / /   |    /\n\
-/_ __|/ /_/ // ____// /___ / /|  / ___/ /___/ // /___/_ __| \n\
- |/   \____//_/    /_____//_/ |_/ /____//____//_____/ |/    \n\
-************************************************************\x1b[0m\n"
+**********"
+	@echo "*         ____   ____   ______ _   __ _____ _____  __\t     *\n\
+*  __/|_ / __ \ / __ \ / ____// | / // ___// ___/ / /   __/|_*\n\
+* |    // / / // /_/ // __/  /  |/ / \__ \ \__ \ / /   |    /*\n\
+*/_ __|/ /_/ // ____// /___ / /|  / ___/ /___/ // /___/_ __| *\n\
+* |/   \____//_/    /_____//_/ |_/ /____//____//_____/ |/    *\n\
+**************************************************************\x1b[0m\n"
 	@echo "\x1b[1m\x1b[93mHASH FUNCTIONS USAGE: <command> <flag> <optional string | file>\n\x1b[0m"
+
+lib:
+	@echo -n 'Compiling libft...'
+	@make -C libft/ re
+	@cp libft/libft.a .
+	@echo "\t\t\x1b[92m✓\x1b[0m\n"
 
 totall: lib all
 
@@ -82,6 +86,6 @@ totfclean: fclean
 	@echo "\x1b[96mLibft has been cleaned.\x1b[0m\t\x1b[91mDon't forget to\
 		recompile it...\n\x1b[0m"
 
-re: fclean all
+re: totfclean totall
 
 tot: totfclean totall
