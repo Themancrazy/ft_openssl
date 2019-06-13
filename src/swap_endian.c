@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/16 18:51:22 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/22 07:37:55 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 11:59:34 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_ssl				*handle_flags(t_ssl *s)
 	return (s);
 }
 
-char				*handle_files(t_ssl *s, int argc, char **argv, int fd)
+char				*handle_files(t_ssl *s, int fd)
 {
 	char	*line;
 	char	*str;

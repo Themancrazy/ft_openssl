@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 14:44:17 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/11 18:43:08 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:10:03 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,6 @@ static char		base64_encoding[64] = {
 	't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
 	'8', '9', '+', '/',
 };
-
-static void		get_binary(char *str)
-{
-	while (*str)
-	{
-		ft_printf("%08b ", *str);
-		str++;
-	}
-	ft_putchar('\n');
-}
 
 static int				get_size(char *str, char c)
 {
@@ -60,12 +50,14 @@ void			encrypt_str(char *str)
 	xy[1] = 6;
 	size = get_size(str, 'e');
 	encrypted = ft_memalloc(sizeof(char) * size + 1);
-	while (size > 0)
+	printf("ORIGINAL SIZE = %d\n", size);
+	while (size >= 0)
 	{
+		ft_printf("\nSIZE = %d\tCHAR IS %c\n", size, *(encrypted - 1));
 		if (xy[0] == 10)
 			xy[0] = 2;
 		if (xy[1] == -2)
-			xy[1] = 4;
+			xy[1] = 6;
 		if (xy[0] == 2)
 		{
 			*encrypted = base64_encoding[RIGHT_SHIFT(*str)];
@@ -74,6 +66,7 @@ void			encrypt_str(char *str)
 		}
 		else if (xy[0] == 4 || xy[0] == 6)
 		{
+			//ft_printf("\nSTR - 1->\t%c\nSTR->\t%c\nX->\t%d\nY->\t%d\nRS->\t%06b\n", *(str - 1), *str, xy[0], xy[1], SHIFT(*(str - 1), *str, xy[0], xy[1]));
 			*encrypted = base64_encoding[SHIFT(*(str - 1), *str, xy[0], xy[1])];
 			encrypted++;
 			size--;
@@ -84,26 +77,34 @@ void			encrypt_str(char *str)
 			encrypted++;
 			size--;
 		}
+		else if (size > 0)
+			*encrypted = '=';
 		xy[0] += 2;
 		xy[1] -= 2;
 		if (xy[1] != 0)
 			str++;
+		if (*str == '\0')
+			*str = 0;
+		ft_printf("\nSIZE = %d\tCHAR IS %c\n", size, *(encrypted - 1));
 	}
+	ft_putstr(encrypted);
 	ft_putchar('\n');
 }
 
 void			decrypt_str(char *str)
 {
-
+	(void)str;
 }
 
 void			base64(int argc, char **argv)
 {
 	t_base64	base;
+	//char		*input;
 	
 	base.flag = 0;
-	if (argc > 1 && argc <= 2)
+	if (argc >= 1 && argc <= 2)
 	{
+		//input = get_input(argv[1]);
 		base = check_b64_flags(base, argv[0]);
 		if (base.flag & FLE)
 			encrypt_str(argv[1]);

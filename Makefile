@@ -6,7 +6,7 @@
 #    By: anjansse <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:57:22 by anjansse          #+#    #+#              #
-#    Updated: 2019/06/12 19:53:26 by anjansse         ###   ########.fr        #
+#    Updated: 2019/06/13 12:13:30 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ all: $(NAME)
 $(NAME):
 	@echo -n 'Compiling DES Program...'
 	@cp libft/libft.a .
-	@$(CC) $(CFLAG) $(SRCS) $(INCLUDES) $(LLIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) $(INCLUDES) $(LLIB) -o $(NAME)
 	@echo "\t\x1b[92m✓✓\x1b[0m\n"
 	@sleep 0.1
 	@clear

@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 20:48:18 by anjansse          #+#    #+#             */
-/*   Updated: 2019/02/23 09:35:48 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 11:24:57 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,9 @@ int						parse_it(t_answer *ret, t_arg *key, char *str,
 	int					x;
 
 	x = 0;
-	initiate_values(ret, key);
 	while (str[x])
 	{
+		initiate_values(ret, key);
 		if (str[x + 1] && str[x] == '%')
 		{
 			x++;

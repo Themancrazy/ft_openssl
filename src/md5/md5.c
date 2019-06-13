@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 20:08:33 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/06 14:58:27 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:02:57 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ static t_ssl	*other_ssl_md5(t_ssl *s, char *sol, char *fn, int flag)
 
 	while ((fd = open(s->av[s->i], O_RDONLY)) > 2)
 	{
-		sol = "";
-		sol = ft_strjoin(sol, handle_files(s, s->ac, s->av, fd));
+		sol = ft_strjoin(sol, handle_files(s, fd));
 		if (s->fl & FLP)
 			ft_putstr(sol);
 		if (!(s->fl & FLQ) && (!(s->fl & FLR)))
@@ -43,7 +42,6 @@ static t_ssl	*other_ssl_md5(t_ssl *s, char *sol, char *fn, int flag)
 
 void			ssl_md5(int argc, char **argv)
 {
-	int		fd;
 	int		flag;
 	char	*sol;
 	char	*fn;
@@ -53,6 +51,8 @@ void			ssl_md5(int argc, char **argv)
 	s->i = -1;
 	s->av = argv;
 	s->ac = argc;
+	sol = "";
+	fn = "";
 	while (++s->i <= s->ac)
 	{
 		if (s->av[s->i] && s->av[s->i][0] == '-')

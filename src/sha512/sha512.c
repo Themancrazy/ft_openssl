@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 20:08:33 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/21 22:07:38 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:06:34 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static t_ssl	*other_ssl_sha512(t_ssl *s, char *sol, char *fn, int flag)
 	while ((fd = open(s->av[s->i], O_RDONLY)) > 2)
 	{
 		sol = "";
-		sol = ft_strjoin(sol, handle_files(s, s->ac, s->av, fd));
+		sol = ft_strjoin(sol, handle_files(s, fd));
 		if (s->fl & FLP)
 			ft_putstr(sol);
 		if (!(s->fl & FLQ) && (!(s->fl & FLR)))
@@ -34,12 +34,13 @@ static t_ssl	*other_ssl_sha512(t_ssl *s, char *sol, char *fn, int flag)
 
 void			ssl_sha512(int argc, char **argv)
 {
-	int		fd;
 	int		flag;
 	char	*sol;
 	char	*fn;
 	t_ssl	*s;
 
+	sol = "";
+	fn = "";
 	s = ft_memalloc(sizeof(t_ssl));
 	s->i = -1;
 	s->av = argv;

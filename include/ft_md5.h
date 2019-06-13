@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 20:18:01 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/21 22:04:58 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:03:42 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				md5_hash(char *str, int flag, char *fn);
 t_md5				*prepare_om(char *str, t_md5 *m);
 t_md5				*init_hash(t_md5 *m, int max);
 t_md5				*md5_shift(t_md5 *m, int i);
-t_md5				*process_md5(t_md5 *m, int max);
+t_md5				*process_md5(t_md5 *m);
 t_md5				*update_abcd(t_md5 *m);
 t_md5				*reset_abcd(t_md5 *m);
 t_md5				*create_block(t_md5 *m, int start);

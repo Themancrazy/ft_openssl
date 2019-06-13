@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 12:11:07 by anjansse          #+#    #+#             */
-/*   Updated: 2019/03/21 21:59:38 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 12:09:11 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ t_sha512			*sha512_init_hash(t_sha512 *m, int max)
 
 t_sha512			*sha512_prepare_om(char *str, t_sha512 *m)
 {
-	int						i;
+	unsigned long long			i;
 	int						len;
 	unsigned long long		max;
 

@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 10:16:02 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/07 18:37:31 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 11:59:05 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct		s_ssl {
 }					t_ssl;
 
 t_ssl				*handle_flags(t_ssl *s);
-char				*handle_files(t_ssl *s, int argc, char **argv, int fd);
+char				*handle_files(t_ssl *s, int fd);
 void				handle_str(t_ssl *s, char *sol, char *type);
 void				dispatcher(int argc, char **argv);
 void				handle_stdin(void);
