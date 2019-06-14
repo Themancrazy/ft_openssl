@@ -6,12 +6,16 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 21:16:01 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/14 13:12:14 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/14 14:11:16 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ssl.h>
 #include "../../include/base64.h"
+
+/*
+** Counts the number of padding bits at the end of input.
+*/
 
 int			extra_pad(char *str)
 {
@@ -28,6 +32,10 @@ int			extra_pad(char *str)
 	return (0);
 }
 
+/*
+** Cuts out the padding characters at the end of input.
+*/
+
 char				*pad_end(char *str, int pad)
 {
 	if (pad == 0)
@@ -36,6 +44,11 @@ char				*pad_end(char *str, int pad)
 		str = ft_strjoin(str, "==");
 	return (str);
 }
+
+/*
+** Gets the size of encryption or decryption and returns it to be used
+** for mallocing in encryption and decryption,
+*/
 
 int			get_size(char *str, char c)
 {
@@ -56,6 +69,10 @@ int			get_size(char *str, char c)
 	}
 	return (0);
 }
+
+/*
+** Dispatches all the B64_ENCODING characters to match with the encrypted char.
+*/
 
 int				*dispatch_b64(char *str)
 {
@@ -79,6 +96,11 @@ int				*dispatch_b64(char *str)
 	}
 	return (id);
 }
+
+/*
+** Flag checker, returns a unsigned char that will tell which flags have been 
+** activated.
+*/
 
 t_base64		check_b64_flags(t_base64 base, char *flag)
 {
