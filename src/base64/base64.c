@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 14:44:17 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/13 22:30:26 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 23:38:40 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,18 @@ void					manage_ie(char *str)
 
 void			decrypt_str(char *str)
 {
-	//int		size;
-	//char	*decrypted;
+	int		size;
+	int		chunk;
+	char	*decrypted;
 
-	//size = get_size(str, 'd');
-	//decrypted = ft_memalloc(sizeof(char) * size + 5);
 	str = skip_ws(ft_strdup(str));
-
+	size = get_size(str, 'd');
+	decrypted = ft_memalloc(sizeof(char) * size + 5);
+	chunk = (extra_pad(str) == 0) ? 3 : (extra_pad(str) == 1) ? 2 : 1;
+	while (size > 0)
+	{
+		size--;
+	}
 	ft_putstr(str);
 }
 
