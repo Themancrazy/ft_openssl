@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:47:30 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/06 15:18:22 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 22:04:30 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,32 @@ static void			manage_error(char *str, t_dis *cmd)
 	while (i < CMD)
 		ft_printf("%s\n", cmd[i++].name);
 	ft_printf("\nCipher commands:\n");
+}
+
+char				*get_input(char *str, t_base64 base)
+{
+	int			fd;
+	char		*line;
+	char		*input;
+	char		*file_content;
+
+	input = "";
+	fd = open(str, O_RDONLY);
+	if (str && fd < 0 && (base.flag & FLE || base.flag & FLD))
+		return (str);
+	if (fd >= 0 && (base.flag & FLI || base.flag & FLO))
+	{
+		read_file(str, &file_content);
+		return (file_content);
+	}
+	if (!str)
+	{
+		while (get_next_line(0, &line) > 0)
+			input = ft_strjoinfree2(input, line);
+	return (input);
+	}
+	send_error(ft_strdup(RED"Bad use of flag."RESET));
+	return (NULL);
 }
 
 void				dispatcher(int argc, char **argv)

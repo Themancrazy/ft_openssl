@@ -6,7 +6,7 @@
 #    By: anjansse <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/29 09:51:04 by anjansse          #+#    #+#              #
-#    Updated: 2019/06/13 11:23:47 by anjansse         ###   ########.fr        #
+#    Updated: 2019/06/13 22:17:10 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ STRING		= ft_strcat.c ft_strchr.c ft_strclr.c ft_strcmp.c ft_strcpy.c\
 			  ft_range.c ft_strclen.c ft_strappend.c ft_strjoinfree.c\
 			  ft_strjoinfree1.c ft_strjoinfree2.c
 
-CHAR		= ft_tolower.c ft_toupper.c
+CHAR		= ft_tolower.c ft_toupper.c skip_ws.c
+
+READ_FILE	= read_file.c
 
 GNL			= get_next_line.c
 
@@ -48,7 +50,8 @@ PRINTF		= ft_printf.c check.c handle.c keys.c main_check.c manage.c\
 			  parse.c manage_dsc.c manage_pf.c manage_uox.c ftoa.c ft_iitoa.c\
 			  ft_itoa_base.c pf_functions.c pf_functions2.c pf_functions3.c
 
-FUNCTIONS	= $(IS) $(STRUCT) $(MEMORY) $(NUMBER) $(PRINT) $(STRING) $(CHAR)
+FUNCTIONS	= $(IS) $(STRUCT) $(MEMORY) $(NUMBER) $(PRINT) $(STRING) $(CHAR)\
+			  $(READ_FILE)
 
 FILES		= $(addprefix srcs/, $(FUNCTIONS))\
 			  $(addprefix srcs/, $(addprefix gnl/, $(GNL)))\

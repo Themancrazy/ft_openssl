@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 22:16:13 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/07 13:09:40 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 22:16:40 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define LIBFT_H
 # define BUFF_SIZE 50
 
+# include <sys/stat.h>
+# include <sys/mman.h>
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
@@ -38,13 +41,15 @@ typedef struct		s_list
 }					t_list;
 
 int					get_next_line(int fd, char **line);
+void				read_file(char *filename, char **content);
 char				*ft_capitalize(char *s);
+char				*skip_ws(char *str);
 int					*ft_range(int start, int end);
 int					ft_strclen(char *str, char c);
-char				*ft_iswhitespace(char *str);
 int					ft_atoi(const char *str);
 
 void				ft_bzero(void *s1, size_t n);
+int					ft_isws(char c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);

@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 16:01:22 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/11 17:44:21 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 21:19:42 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,10 @@ typedef struct			s_base64 {
 	int					size;
 	unsigned char		flag;
 }						t_base64;
+
+t_base64				check_b64_flags(t_base64 base, char *flag);
+char					*get_input(char *str, t_base64 base);
+char					*pad_end(char *str, int pad);
+int						get_size(char *str, char c);
 
 #endif

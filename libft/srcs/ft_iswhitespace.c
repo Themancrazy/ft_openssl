@@ -6,16 +6,16 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 16:54:29 by anjansse          #+#    #+#             */
-/*   Updated: 2018/12/04 20:36:51 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 22:15:08 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
-char	*ft_iswhitespace(char *str)
+int			ft_isws(char c)
 {
-	while (*str == ' ' || *str == '\n' || *str == '\t' || *str == '\v' || *str
-			== '\r' || *str == '\f')
-		str++;
-	return (str);
+	if (c == ' ' || c == '\n' || c == '\t' || c == '\v' || c
+			== '\r' || c == '\f')
+		return (1);
+	return (0);
 }

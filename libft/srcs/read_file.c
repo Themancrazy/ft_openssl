@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/28 20:02:38 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/13 13:13:34 by anjansse         ###   ########.fr       */
+/*   Created: 2019/06/13 15:54:05 by anjansse          #+#    #+#             */
+/*   Updated: 2019/06/13 20:05:47 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char		*ft_strjoinfree(char *s1, char *s2)
+void		read_file(char *filename, char **content)
 {
-	char	*s3;
+	int		fd;
+	struct	stat st;
 
-	s3 = ft_strjoin(s1, s2);
-	ft_strdel(&s1);
-	ft_strdel(&s2);
-	return (s3);
+	fd = open(filename, O_RDONLY);
+	*content = NULL;
+	stat(filename, &st);
+	*content = (char *)mmap(*content, st.st_size, PROT_READ, MAP_PRIVATE,\
+			fd, 0);
 }

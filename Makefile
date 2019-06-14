@@ -6,7 +6,7 @@
 #    By: anjansse <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/28 21:57:22 by anjansse          #+#    #+#              #
-#    Updated: 2019/06/13 12:13:30 by anjansse         ###   ########.fr        #
+#    Updated: 2019/06/13 21:20:13 by anjansse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SHA224		=	sha224.c sha224_hash.c
 SHA384		=	sha384.c
 SHA512		=	sha512.c sha512_hash.c sha512_process_functions.c\
 				sha512_utils.c
-BASE64		=	base64.c
+BASE64		=	base64.c extra.c
 DES			=	des.c
 DES_ECB		=	des_ecb.c
 DES_CBC		=	des_cbc.c

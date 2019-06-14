@@ -6,11 +6,11 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/04 20:44:34 by anjansse          #+#    #+#             */
-/*   Updated: 2018/12/13 12:47:43 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/13 18:07:58 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 static int		save_line(int fd, char **line, char **f)
 {
@@ -23,6 +23,7 @@ static int		save_line(int fd, char **line, char **f)
 	if (f[fd][len] == '\n')
 	{
 		*line = ft_strsub(f[fd], 0, len);
+		*line = ft_strappend(*line, '\n');
 		tmp = ft_strdup(f[fd] + len + 1);
 		free(f[fd]);
 		f[fd] = tmp;
