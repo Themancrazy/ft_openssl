@@ -6,20 +6,16 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/06 14:44:17 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/13 23:38:40 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/14 13:21:21 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <ft_ssl.h>
 #include "../../include/base64.h"
 
-static char			base64_encoding[64] = {
-	'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O',
-	'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',
-	'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
-	't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', '3', '4', '5', '6', '7',
-	'8', '9', '+', '/',
-};
+/*
+** Main encryption function. Uses the Base64 algorithm to encrypt input.
+*/
 
 static void				encrypt_b64(char *str, int i, int xy[2], char *encrypt)
 {
@@ -28,14 +24,19 @@ static void				encrypt_b64(char *str, int i, int xy[2], char *encrypt)
 	if (xy[1] == -2)
 			xy[1] = 6;
 	if (xy[0] == 2)
-		encrypt[i] = base64_encoding[RIGHT_SHIFT(*str)];
+		encrypt[i] = B64_ENCODING[RIGHT_SHIFT(*str)];
 	else if (xy[0] == 4 || xy[0] == 6)
-		encrypt[i] = base64_encoding[SHIFT(*(str - 1), *str, xy[0], xy[1])];
+		encrypt[i] = B64_ENCODING[SHIFT(*(str - 1), *str, xy[0], xy[1])];
 	else if (xy[1] == 0)
-		encrypt[i] = base64_encoding[LEFT_SHIFT(*str)];
+		encrypt[i] = B64_ENCODING[LEFT_SHIFT(*str)];
 }
 
-void					manage_ie(char *str)
+/*
+** Sets up all the variables used in the main encryption loop. xy[0] = x,
+** xy[1] = y. The algorithm is displayed as a Macro in the base64.h.
+*/
+
+static void					manage_ie(char *str)
 {
 	int		i;
 	int		size;
@@ -63,22 +64,60 @@ void					manage_ie(char *str)
 	free(encrypted);
 }
 
-void			decrypt_str(char *str)
+/*
+** Main decryption function. Uses the Base64 algorithm to decrypt input back
+** to normal str.
+*/
+
+static void			decrypt_b64(int *xy, int *id, char *decrypted)
 {
+	if (xy[0] == 8)
+		xy[0] = 2;
+	if (xy[1] == -2)
+		xy[1] = 4;
+	decrypted[xy[2]] = DECRYPT_B64(*id, *(id + 1), xy[0], xy[1]);
+	xy[2]++;
+	xy[0] += 2;
+	xy[1] -= 2;
+}
+
+/*
+** Sets up all the variables used in the main decryption loop. xy[0] = x,
+** xy[1] = y and xy[3] = index of *decrypted str.
+** The algorithm is displayed as DECRYPT_B64 Macro in the base64.h.
+*/
+
+static void				manage_od(char *str)
+{
+	int		xy[3];
 	int		size;
-	int		chunk;
+	int		*id;
 	char	*decrypted;
 
 	str = skip_ws(ft_strdup(str));
 	size = get_size(str, 'd');
 	decrypted = ft_memalloc(sizeof(char) * size + 5);
-	chunk = (extra_pad(str) == 0) ? 3 : (extra_pad(str) == 1) ? 2 : 1;
+	str = (extra_pad(str) == 0) ? str : (extra_pad(str) == 1) ? ft_strsub(str,\
+			0, ft_strlen(str) - 1) : ft_strsub(str, 0, ft_strlen(str) - 2);
+	id = dispatch_b64(str);
+	xy[0] = 2;
+	xy[1] = 4;
+	xy[2] = 0;
 	while (size > 0)
 	{
+		decrypt_b64(xy, id, decrypted);
+		if (xy[0] == 8)
+			id += 2;
+		else if (xy[0] != 8)
+			id++;
 		size--;
 	}
-	ft_putstr(str);
+	ft_putstr(decrypted);
 }
+
+/*
+** Main base64 receiving function.
+*/
 
 void			base64(int argc, char **argv)
 {
@@ -93,7 +132,7 @@ void			base64(int argc, char **argv)
 		if (base.flag & FLE || base.flag & FLI)
 			manage_ie(input);
 		else if (base.flag & FLD || base.flag & FLO)
-			decrypt_str(input);
+			manage_od(input);
 	}
 	else
 		send_error(ft_strdup(RED"Number of arguments not correct."RESET));

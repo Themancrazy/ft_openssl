@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 21:16:01 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/13 23:08:14 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/14 13:12:14 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,15 @@ int			extra_pad(char *str)
 	return (0);
 }
 
+char				*pad_end(char *str, int pad)
+{
+	if (pad == 0)
+		str = ft_strjoin(str, "=");
+	else if (pad == 2)
+		str = ft_strjoin(str, "==");
+	return (str);
+}
+
 int			get_size(char *str, char c)
 {
 	int		size;
@@ -42,9 +51,33 @@ int			get_size(char *str, char c)
 	}
 	else if (c == 'd')
 	{
-		size = ((ft_strlen(str) - extra_pad(str)) * 6) / 8;
+		size = ((ft_strlen(str) * 6) - (extra_pad(str) * 2)) / 8;
+		return (size);
 	}
 	return (0);
+}
+
+int				*dispatch_b64(char *str)
+{
+	int		i;
+	int		j;
+	int		*id;
+
+	i = 0;
+	id = ft_memalloc(sizeof(int) * ft_strlen(str) + 1);
+	while (*str)
+	{
+		j = 0;
+		while (j < 64)
+		{
+			if (*str == B64_ENCODING[j])
+				id[i] = j;
+			j++;
+		}
+		i++;
+		str++;
+	}
+	return (id);
 }
 
 t_base64		check_b64_flags(t_base64 base, char *flag)
@@ -58,13 +91,4 @@ t_base64		check_b64_flags(t_base64 base, char *flag)
 	else if (!ft_strcmp(flag, "-o"))
 		base.flag |= FLO;
 	return (base);
-}
-
-char				*pad_end(char *str, int pad)
-{
-	if (pad == 0)
-		str = ft_strjoin(str, "=");
-	else if (pad == 2)
-		str = ft_strjoin(str, "==");
-	return (str);
 }
