@@ -6,7 +6,7 @@
 /*   By: anjansse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 10:16:02 by anjansse          #+#    #+#             */
-/*   Updated: 2019/06/13 20:57:05 by anjansse         ###   ########.fr       */
+/*   Updated: 2019/06/17 19:03:31 by anjansse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,5 @@ void				ssl_sha512(int argc, char **argv);
 
 void				base64(int argc, char **argv);
 void				des(int argc, char **argv);
-void				des_cbc(int argc, char **argv);
-void				des_ecb(int argc, char **argv);
 
 #endif
